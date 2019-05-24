@@ -1,0 +1,69 @@
+# -*- coding: utf-8 -*-
+"""
+Spyder Editor
+
+This is a temporary script file.
+"""
+
+def main():
+    T = int(input())
+    for t in range(T):
+        N = int(input())
+        arr = list(map(int,input().split()))[:N]
+        res = []
+        A = []
+        B = []
+        add = 0
+        ele = 0
+        count = 0
+        c = -1001
+        if arr[0]>0:
+            A.append(arr[0])
+            res = A
+            ele = arr[0]
+            count = count+1
+        else:
+            c = arr[0]
+        for i in range(1, len(arr)):
+# =============================================================================
+#             print("Iteration:"+str(i))
+#             print(A)
+#             print(B)
+# =============================================================================
+            if arr[i]>0:
+                count = count+1
+            if count == 0:
+                c = max(c, arr[i])
+            else:
+                if ele == add:
+                    if i%2 == 1:
+                        A = list(B)
+                    if i%2 == 0:
+                        B = list(A)
+                new = arr[i]+add
+                add = ele
+                ele = max(new, ele)
+                if i%2 == 1:
+                    if new>add:
+                        B.append(arr[i])
+                        res = B
+                                        
+                if i%2 == 0:
+                    if new>add:
+                        A.append(arr[i])
+                        res = A
+        if count == 0:
+            res = [c]
+        for i, val in enumerate(res[::-1]):
+            if i == len(res):
+                print(val)
+            else:
+                print(val,end="")
+                
+# =============================================================================
+#         print(A)
+#         print(B)
+#         print(ele)
+# =============================================================================
+
+main()
